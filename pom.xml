@@ -8,11 +8,22 @@
 		<version>3.0.4</version>
 		<relativePath/>
 	</parent>
+
 	<groupId>io.github.giuliodalbono</groupId>
 	<artifactId>demo-maven-central</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+
 	<name>demo-maven-central</name>
 	<description>demo-maven-central</description>
+	<url>https://github.com/giuliodalbono/demo-maven-central</url>
+
+	<scm>
+		<connection>scm:git:git://github.com/giuliodalbono/demo-maven-central.git</connection>
+		<developerConnection>scm:git:git://github.com/giuliodalbono/demo-maven-central.git</developerConnection>
+		<url>https://github.com/giuliodalbono/demo-maven-central</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<properties>
 		<java.version>11</java.version>
 	</properties>
