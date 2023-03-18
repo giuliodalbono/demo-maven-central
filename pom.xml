@@ -32,7 +32,7 @@
 	</licenses>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
 		<jreleaser-maven-plugin.version>1.5.1</jreleaser-maven-plugin.version>
