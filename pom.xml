@@ -11,10 +11,9 @@
 
 	<groupId>io.github.giuliodalbono</groupId>
 	<artifactId>demo-maven-central</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-
 	<name>demo-maven-central</name>
 	<description>demo-maven-central</description>
+	<version>0.0.1-SNAPSHOT</version>
 	<url>https://github.com/giuliodalbono/demo-maven-central</url>
 
 	<scm>
@@ -24,9 +23,21 @@
 		<tag>HEAD</tag>
 	</scm>
 
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
 	<properties>
 		<java.version>11</java.version>
+		<maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+		<maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+		<jreleaser-maven-plugin.version>1.5.1</jreleaser-maven-plugin.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -63,5 +74,77 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>${maven-javadoc-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-javadoc</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>${maven-source-plugin.version}</version>
+						<executions>
+							<execution>
+								<id>attach-source</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.jreleaser</groupId>
+						<artifactId>jreleaser-maven-plugin</artifactId>
+						<version>${jreleaser-maven-plugin.version}</version>
+						<configuration>
+							<jreleaser>
+								<signing>
+									<active>ALWAYS</active>
+									<armored>true</armored>
+								</signing>
+								<deploy>
+									<maven>
+										<nexus2>
+											<maven-central>
+												<active>ALWAYS</active>
+												<url>https://s01.oss.sonatype.org/service/local</url>;
+												<closeRepository>false</closeRepository>
+												<releaseRepository>false</releaseRepository>
+												<stagingRepositories>target/staging-deploy</stagingRepositories>
+											</maven-central>
+										</nexus2>
+									</maven>
+								</deploy>
+							</jreleaser>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<developers>
+		<developer>
+			<id>giuliodalbono</id>
+			<name>Giulio Dal Bono</name>
+			<email>dalbonogiulio@gmail.com</email>
+		</developer>
+	</developers>
 
 </project>
